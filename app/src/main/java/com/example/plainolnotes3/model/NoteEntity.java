@@ -1,12 +1,19 @@
 package com.example.plainolnotes3.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.util.Date;
 
+@Entity(tableName = "notes")
 public class NoteEntity {
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private Date date;
     private String text;
 
+    @Ignore
     public NoteEntity() {
     }
 
@@ -16,6 +23,7 @@ public class NoteEntity {
         this.text = text;
     }
 
+    @Ignore
     public NoteEntity(Date date, String text) {
         this.date = date;
         this.text = text;
