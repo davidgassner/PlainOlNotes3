@@ -1,4 +1,4 @@
-package com.example.plainolnotes3.model;
+package com.example.plainolnotes3.database;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;

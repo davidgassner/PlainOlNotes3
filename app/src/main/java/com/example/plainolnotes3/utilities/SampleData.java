@@ -1,6 +1,6 @@
 package com.example.plainolnotes3.utilities;
 
-import com.example.plainolnotes3.model.NoteEntity;
+import com.example.plainolnotes3.database.NoteEntity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
