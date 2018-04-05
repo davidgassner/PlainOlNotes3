@@ -1,5 +1,6 @@
 package com.example.plainolnotes3.database;
 
+import android.arch.lifecycle.LiveData;
 import android.content.Context;
 
 import com.example.plainolnotes3.utilities.SampleData;
@@ -11,7 +12,7 @@ import java.util.concurrent.Executors;
 public class AppRepository {
     private static AppRepository ourInstance;
 
-    public List<NoteEntity> mNotes;
+    public LiveData<List<NoteEntity>> mNotes;
     private AppDatabase mDb;
     private Executor executor = Executors.newSingleThreadExecutor();
 
@@ -23,8 +24,8 @@ public class AppRepository {
     }
 
     private AppRepository(Context context) {
-        mNotes = SampleData.getNotes();
         mDb = AppDatabase.getInstance(context);
+        mNotes = getAllNotes();
     }
 
     public void addSampleData() {
@@ -34,5 +35,9 @@ public class AppRepository {
                 mDb.noteDao().insertAll(SampleData.getNotes());
             }
         });
+    }
+
+    private LiveData<List<NoteEntity>> getAllNotes() {
+        return mDb.noteDao().getAll();
     }
 }
