@@ -1,5 +1,6 @@
 package com.example.plainolnotes3;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import com.example.plainolnotes3.database.NoteEntity;
 import com.example.plainolnotes3.ui.NotesAdapter;
 import com.example.plainolnotes3.utilities.SampleData;
+import com.example.plainolnotes3.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     private List<NoteEntity> notesData = new ArrayList<>();
     private NotesAdapter mAdapter;
+    private MainViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +47,19 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
+        initViewModel();
         initRecyclerView();
 
-        notesData.addAll(SampleData.getNotes());
+        notesData.addAll(mViewModel.mNotes);
         for (NoteEntity note :
                 notesData) {
             Log.i("PlainOlNotes", note.toString());
         }
+    }
+
+    private void initViewModel() {
+            mViewModel = ViewModelProviders.of(this)
+                    .get(MainViewModel.class);
     }
 
     private void initRecyclerView() {
