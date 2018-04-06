@@ -57,10 +57,10 @@ public class EditorActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
-            setTitle("New note");
+            setTitle(getString(R.string.new_note));
             mNewNote = true;
         } else {
-            setTitle("Edit note");
+            setTitle(getString(R.string.edit_note));
             int noteId = extras.getInt(NOTE_ID_KEY);
             mViewModel.loadData(noteId);
         }
